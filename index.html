@@ -6,18 +6,51 @@
     <title>GOLD Autoaufbereitung | Das High-End Detailing Center in Braunschweig</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    <!-- AOS Library for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #000; 
+            color: #fff; 
+            scroll-behavior: smooth; 
+            overflow-x: hidden;
+        }
         .hero-font { font-family: 'Syncopate', sans-serif; }
         .gold-text { color: #D4AF37; }
         .gold-bg { background-color: #D4AF37; }
-        .bg-mesh {
-            background-color: #000;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(47,100%,50%,0.15) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(0,0%,10%,0.2) 0, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(47,100%,50%,0.1) 0, transparent 50%);
+        
+        /* Moving Background Gradient */
+        .bg-animated {
+            background: linear-gradient(-45deg, #000, #1a1a1a, #0d0d0d, #000);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
         }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-mesh {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(47,100%,50%,0.08) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, hsla(47,100%,50%,0.05) 0, transparent 50%);
+            pointer-events: none;
+        }
+
         .reveal-anim {
             animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
         }
@@ -25,56 +58,87 @@
             0% { transform: translateY(100px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
+
         .card-blur {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.5s ease;
         }
+        .card-blur:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-10px);
+        }
+
         .input-dark {
             background: rgba(255,255,255,0.05);
             border: 1px solid rgba(255,255,255,0.1);
             color: #fff;
+            transition: all 0.3s ease;
         }
         .input-dark:focus {
             border-color: #D4AF37;
+            background: rgba(255,255,255,0.08);
             outline: none;
+        }
+        
+        .btn-hover-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-hover-effect::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-hover-effect:hover::after {
+            left: 100%;
         }
     </style>
 </head>
-<body class="bg-mesh overflow-x-hidden">
+<body>
+    <div class="bg-animated"></div>
+    <div class="bg-mesh"></div>
+
     <!-- Progress Bar -->
     <div class="fixed top-0 left-0 w-full h-1 bg-zinc-900 z-50">
-        <div class="h-full gold-bg" style="width: 100%"></div>
+        <div class="h-full gold-bg shadow-[0_0_15px_#D4AF37]" style="width: 100%"></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference">
+    <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference" data-aos="fade-down">
         <div class="hero-font text-xl tracking-tighter">GOLD.</div>
         <div class="hidden md:flex space-x-12 text-sm uppercase tracking-widest font-bold">
             <a href="#leistungen" class="hover:gold-text transition">Leistungen</a>
             <a href="#anfahrt" class="hover:gold-text transition">Anfahrt</a>
             <a href="#kontakt" class="hover:gold-text transition">Kontakt</a>
         </div>
-        <a href="#kontakt" class="gold-bg text-black px-4 py-2 font-bold text-xs uppercase tracking-tighter">Buchen</a>
+        <a href="#kontakt" class="gold-bg text-black px-6 py-2 font-bold text-xs uppercase tracking-tighter btn-hover-effect">Buchen</a>
     </nav>
 
     <!-- Hero Section -->
     <section class="min-h-screen relative flex items-center justify-center p-6 overflow-hidden">
-        <div class="absolute inset-0 z-0 opacity-40">
+        <div class="absolute inset-0 z-0 opacity-40" data-aos="zoom-out" data-aos-duration="3000">
             <img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover scale-110 blur-sm" alt="Car Detail">
             <div class="absolute inset-0 bg-black/60"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto w-full reveal-anim">
-            <p class="gold-text font-bold uppercase tracking-[0.3em] mb-6 text-sm text-center md:text-left">Braunschweig's No. 1 Autoaufbereitung</p>
-            <h1 class="hero-font text-5xl md:text-9xl mb-8 leading-none tracking-tighter text-center md:text-left">
+            <p class="gold-text font-bold uppercase tracking-[0.3em] mb-6 text-sm text-center md:text-left" data-aos="fade-right" data-aos-delay="500">Braunschweig's No. 1 Autoaufbereitung</p>
+            <h1 class="hero-font text-5xl md:text-9xl mb-8 leading-none tracking-tighter text-center md:text-left" data-aos="fade-up" data-aos-delay="200">
                 PERFEKTION<br><span class="gold-text">IM DETAIL</span>
             </h1>
-            <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 border-t border-white/10 pt-12">
+            <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 border-t border-white/10 pt-12" data-aos="fade-up" data-aos-delay="800">
                 <p class="text-zinc-400 text-lg max-w-md text-center md:text-left">
                     Wir machen keine Autowäsche. Wir kuratieren den Glanz deines Fahrzeugs. High-End Detailing für Liebhaber.
                 </p>
-                <a href="#kontakt" class="gold-bg text-black font-black py-6 px-12 rounded-none text-xl hover:bg-white transition group flex items-center space-x-4 w-full md:w-auto justify-center">
+                <a href="#kontakt" class="gold-bg text-black font-black py-6 px-12 rounded-none text-xl hover:bg-white transition group flex items-center space-x-4 w-full md:w-auto justify-center btn-hover-effect">
                     <span>TERMIN SICHERN</span>
                     <span class="transform group-hover:translate-x-2 transition">→</span>
                 </a>
@@ -83,85 +147,132 @@
     </section>
 
     <!-- Services Grid -->
-    <section id="leistungen" class="py-32 px-6">
+    <section id="leistungen" class="py-32 px-6 relative">
         <div class="max-w-7xl mx-auto">
-            <h2 class="hero-font text-4xl mb-16 text-center">EXKLUSIVE <span class="gold-text">LEISTUNGEN</span></h2>
-            <div class="grid md:grid-cols-3 gap-px bg-white/5 border border-white/5">
-                <div class="p-12 card-blur hover:bg-white/5 transition">
+            <h2 class="hero-font text-4xl mb-24 text-center" data-aos="fade-up">EXKLUSIVE <span class="gold-text">LEISTUNGEN</span></h2>
+            <div class="grid md:grid-cols-3 gap-px bg-white/5 border border-white/5 shadow-2xl">
+                <div class="p-12 card-blur" data-aos="fade-up" data-aos-delay="100">
+                    <div class="text-gold-text text-4xl mb-6">01</div>
                     <h3 class="hero-font text-xl mb-4">INTERIEUR</h3>
                     <p class="text-zinc-500 mb-8">Lederkur, Polsterreinigung & Geruchsbeseitigung.</p>
-                    <span class="gold-text font-bold">AB 149€</span>
+                    <span class="gold-text font-bold tracking-widest text-sm">AB 149€</span>
                 </div>
-                <div class="p-12 card-blur hover:bg-white/5 transition">
+                <div class="p-12 card-blur" data-aos="fade-up" data-aos-delay="300">
+                    <div class="text-gold-text text-4xl mb-6">02</div>
                     <h3 class="hero-font text-xl mb-4">EXTERIEUR</h3>
                     <p class="text-zinc-500 mb-8">Handwäsche, Felgen & Kunststoffpflege.</p>
-                    <span class="gold-text font-bold">AB 199€</span>
+                    <span class="gold-text font-bold tracking-widest text-sm">AB 199€</span>
                 </div>
-                <div class="p-12 card-blur hover:bg-white/5 transition">
+                <div class="p-12 card-blur" data-aos="fade-up" data-aos-delay="500">
+                    <div class="text-gold-text text-4xl mb-6">03</div>
                     <h3 class="hero-font text-xl mb-4">KERAMIK</h3>
                     <p class="text-zinc-500 mb-8">Langzeitschutz & extremer Tiefenglanz.</p>
-                    <span class="gold-text font-bold">AB 699€</span>
+                    <span class="gold-text font-bold tracking-widest text-sm">AB 699€</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Parallax Image Section -->
+    <section class="h-[70vh] relative overflow-hidden flex items-center justify-center">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1603584173870-7f3ca9128146?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover" data-aos="zoom-in" data-aos-duration="3000">
+            <div class="absolute inset-0 bg-black/50"></div>
+        </div>
+        <div class="relative z-10 text-center" data-aos="zoom-out">
+            <h2 class="hero-font text-4xl md:text-7xl mb-4 tracking-tighter">KEINE KOMPROMISSE.</h2>
+            <p class="uppercase tracking-[0.6em] text-xs gold-text font-bold">Absolute Qualität bis in die kleinste Pore</p>
+        </div>
+    </section>
+
     <!-- Maps & Anfahrt -->
-    <section id="anfahrt" class="py-32 px-6 bg-zinc-950">
+    <section id="anfahrt" class="py-32 px-6 relative overflow-hidden">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-            <div>
+            <div data-aos="fade-right">
                 <h2 class="hero-font text-4xl mb-8">SO FINDEN<br><span class="gold-text">SIE UNS.</span></h2>
                 <p class="text-zinc-400 text-lg mb-12">
-                    Besuchen Sie unser Studio in Braunschweig. Parkplätze direkt vor der Tür.
+                    Besuchen Sie unser Studio in Braunschweig. Wir nehmen uns Zeit für eine individuelle Beratung direkt am Fahrzeug.
                 </p>
-                <div class="space-y-6 text-xl mb-12">
-                    <p class="flex items-center space-x-4">
-                        <span class="text-zinc-600 italic">ADRESSE:</span>
-                        <span>Saarbrückener Str. 251, 38116 Braunschweig</span>
-                    </p>
-                    <p class="flex items-center space-x-4">
-                        <span class="text-zinc-600 italic">FON:</span>
-                        <a href="tel:01738547989" class="hover:gold-text transition">0173 8547989</a>
-                    </p>
+                <div class="space-y-8 text-xl mb-12">
+                    <div class="flex items-center space-x-6 group">
+                        <div class="h-12 w-12 rounded-full border border-yellow-600/30 flex items-center justify-center group-hover:gold-bg group-hover:text-black transition duration-500">
+                            <span class="text-sm">📍</span>
+                        </div>
+                        <span class="text-sm md:text-base tracking-widest uppercase">Saarbrückener Str. 251, 38116 BS</span>
+                    </div>
+                    <div class="flex items-center space-x-6 group">
+                        <div class="h-12 w-12 rounded-full border border-yellow-600/30 flex items-center justify-center group-hover:gold-bg group-hover:text-black transition duration-500">
+                            <span class="text-sm">📞</span>
+                        </div>
+                        <a href="tel:01738547989" class="text-sm md:text-base tracking-widest uppercase hover:gold-text transition">0173 8547989</a>
+                    </div>
                 </div>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Saarbrückener+Str.+251,+38116+Braunschweig" target="_blank" class="inline-block border border-white/20 px-8 py-4 hero-font text-sm hover:gold-bg hover:text-black transition">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Saarbrückener+Str.+251,+38116+Braunschweig" target="_blank" class="inline-block border border-gold-text/50 px-10 py-5 hero-font text-xs hover:gold-bg hover:text-black transition btn-hover-effect">
                     ROUTE PLANEN →
                 </a>
             </div>
-            <div class="h-[450px] rounded-3xl overflow-hidden border border-white/10 grayscale contrast-125">
+            <div class="h-[500px] rounded-none overflow-hidden border border-white/5 shadow-2xl relative" data-aos="fade-left">
+                <div class="absolute inset-0 pointer-events-none border-[20px] border-black/20 z-10"></div>
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.4116480112833!2d10.4851346!3d52.279132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47aff657f8afffff%3A0xc9309cb35471c193!2sGOLD%20Autoaufbereitung!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
 
     <!-- Kontaktformular -->
-    <section id="kontakt" class="py-32 px-6">
-        <div class="max-w-3xl mx-auto text-center">
-            <h2 class="hero-font text-4xl mb-16 uppercase">JETZT ANFRAGEN</h2>
-            <form class="grid grid-cols-1 gap-6 text-left">
-                <div class="grid md:grid-cols-2 gap-6">
-                    <input type="text" placeholder="NAME" class="p-6 input-dark rounded-none hero-font text-xs">
-                    <input type="email" placeholder="EMAIL" class="p-6 input-dark rounded-none hero-font text-xs">
+    <section id="kontakt" class="py-32 px-6 relative bg-zinc-950">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-24" data-aos="fade-up">
+                <h2 class="hero-font text-4xl mb-6">JETZT ANFRAGEN</h2>
+                <p class="text-zinc-500 uppercase tracking-widest text-xs">Exklusive Betreuung für exklusive Fahrzeuge</p>
+            </div>
+            <form class="grid grid-cols-1 gap-8 text-left" data-aos="fade-up">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="space-y-2">
+                        <label class="text-[10px] hero-font text-zinc-600 ml-4">VOLSTÄNDIGER NAME</label>
+                        <input type="text" placeholder="Z.B. MAX MUSTERMANN" class="w-full p-6 input-dark rounded-none hero-font text-[10px] tracking-widest">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] hero-font text-zinc-600 ml-4">E-MAIL ADRESSE</label>
+                        <input type="email" placeholder="MAIL@BEISPIEL.DE" class="w-full p-6 input-dark rounded-none hero-font text-[10px] tracking-widest">
+                    </div>
                 </div>
-                <input type="text" placeholder="FAHRZEUGMODELL" class="p-6 input-dark rounded-none hero-font text-xs">
-                <textarea rows="5" placeholder="IHRE NACHRICHT" class="p-6 input-dark rounded-none hero-font text-xs"></textarea>
-                <button type="submit" class="gold-bg text-black font-black py-8 px-12 rounded-none text-xl hover:bg-white transition">
-                    ABSENDEN
+                <div class="space-y-2">
+                    <label class="text-[10px] hero-font text-zinc-600 ml-4">FAHRZEUGMODELL & BAUJAHR</label>
+                    <input type="text" placeholder="Z.B. PORSCHE 911 GT3 (2024)" class="w-full p-6 input-dark rounded-none hero-font text-[10px] tracking-widest">
+                </div>
+                <div class="space-y-2">
+                    <label class="text-[10px] hero-font text-zinc-600 ml-4">IHRE WÜNSCHE</label>
+                    <textarea rows="5" placeholder="WELCHE LEISTUNG INTERESSIERT SIE?" class="w-full p-6 input-dark rounded-none hero-font text-[10px] tracking-widest"></textarea>
+                </div>
+                <button type="submit" class="gold-bg text-black font-black py-8 px-12 rounded-none text-xl hover:bg-white transition btn-hover-effect">
+                    ANFRAGE ABSENDEN
                 </button>
             </form>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="p-12 border-t border-white/5 text-center bg-black">
-        <div class="hero-font text-3xl mb-8 tracking-widest gold-text">GOLD.</div>
-        <div class="flex justify-center space-x-8 text-zinc-500 text-xs tracking-widest uppercase mb-12">
+    <footer class="p-24 border-t border-white/5 text-center bg-black relative">
+        <div class="hero-font text-5xl mb-12 tracking-tighter gold-text opacity-50" data-aos="fade-up">GOLD.</div>
+        <div class="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 text-zinc-500 text-[10px] tracking-[0.3em] uppercase mb-16">
             <a href="impressum.html" class="hover:text-white transition">Impressum</a>
             <a href="datenschutz.html" class="hover:text-white transition">Datenschutz</a>
+            <a href="#" class="hover:text-white transition">Instagram</a>
+            <a href="#" class="hover:text-white transition">TikTok</a>
         </div>
-        <div class="text-zinc-700 text-[10px] tracking-[0.4em] uppercase">
-            &copy; 2026 GOLD AUTOAUFBEREITUNG | INH. YUSUF TOPALOGLU
+        <div class="text-zinc-800 text-[9px] tracking-[0.5em] uppercase">
+            &copy; 2026 GOLD AUTOAUFBEREITUNG | EXPERTS IN AUTOMOTIVE REFINEMENT
         </div>
     </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+    </script>
 </body>
 </html>
