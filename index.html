@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Syncopate:wght@700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; }
+        body { font-family: 'Inter', sans-serif; background-color: #000; color: #fff; scroll-behavior: smooth; }
         .hero-font { font-family: 'Syncopate', sans-serif; }
         .gold-text { color: #D4AF37; }
         .gold-bg { background-color: #D4AF37; }
@@ -30,100 +30,62 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .input-dark {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff;
+        }
+        .input-dark:focus {
+            border-color: #D4AF37;
+            outline: none;
+        }
     </style>
 </head>
 <body class="bg-mesh overflow-x-hidden">
-    <!-- Progress Bar (Fake for Vibe) -->
+    <!-- Progress Bar -->
     <div class="fixed top-0 left-0 w-full h-1 bg-zinc-900 z-50">
-        <div class="h-full gold-bg" style="width: 33%"></div>
+        <div class="h-full gold-bg" style="width: 100%"></div>
     </div>
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full p-8 flex justify-between items-center z-40 mix-blend-difference">
         <div class="hero-font text-xl tracking-tighter">GOLD.</div>
         <div class="hidden md:flex space-x-12 text-sm uppercase tracking-widest font-bold">
-            <a href="#" class="hover:gold-text transition">Leistungen</a>
-            <a href="#" class="hover:gold-text transition">Portfolio</a>
-            <a href="#" class="hover:gold-text transition">Kontakt</a>
+            <a href="#leistungen" class="hover:gold-text transition">Leistungen</a>
+            <a href="#anfahrt" class="hover:gold-text transition">Anfahrt</a>
+            <a href="#kontakt" class="hover:gold-text transition">Kontakt</a>
         </div>
-        <div class="h-6 w-6 flex flex-col justify-between cursor-pointer group">
-            <div class="h-0.5 w-full bg-white group-hover:gold-bg transition"></div>
-            <div class="h-0.5 w-2/3 bg-white self-end group-hover:gold-bg transition"></div>
-        </div>
+        <a href="#kontakt" class="gold-bg text-black px-4 py-2 font-bold text-xs uppercase tracking-tighter">Buchen</a>
     </nav>
 
     <!-- Hero Section -->
     <section class="min-h-screen relative flex items-center justify-center p-6 overflow-hidden">
-        <!-- Background Asset (Simulated Detail Shot) -->
         <div class="absolute inset-0 z-0 opacity-40">
             <img src="https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&q=80&w=2000" class="w-full h-full object-cover scale-110 blur-sm" alt="Car Detail">
             <div class="absolute inset-0 bg-black/60"></div>
         </div>
 
         <div class="relative z-10 max-w-7xl mx-auto w-full reveal-anim">
-            <p class="gold-text font-bold uppercase tracking-[0.3em] mb-6 text-sm">Braunschweig's No. 1 Autoaufbereitung</p>
-            <h1 class="hero-font text-6xl md:text-9xl mb-8 leading-none tracking-tighter">
+            <p class="gold-text font-bold uppercase tracking-[0.3em] mb-6 text-sm text-center md:text-left">Braunschweig's No. 1 Autoaufbereitung</p>
+            <h1 class="hero-font text-5xl md:text-9xl mb-8 leading-none tracking-tighter text-center md:text-left">
                 PERFEKTION<br><span class="gold-text">IM DETAIL</span>
             </h1>
-            <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 border-t border-white/10 pt-12">
-                <p class="text-zinc-400 text-lg max-w-md text-left">
+            <div class="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 border-t border-white/10 pt-12">
+                <p class="text-zinc-400 text-lg max-w-md text-center md:text-left">
                     Wir machen keine Autowäsche. Wir kuratieren den Glanz deines Fahrzeugs. High-End Detailing für Liebhaber.
                 </p>
-                <a href="tel:01738547989" class="gold-bg text-black font-black py-6 px-12 rounded-none text-xl hover:bg-white transition group flex items-center space-x-4">
+                <a href="#kontakt" class="gold-bg text-black font-black py-6 px-12 rounded-none text-xl hover:bg-white transition group flex items-center space-x-4 w-full md:w-auto justify-center">
                     <span>TERMIN SICHERN</span>
                     <span class="transform group-hover:translate-x-2 transition">→</span>
                 </a>
             </div>
         </div>
-        
-        <!-- Animated Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-4">
-            <div class="h-12 w-[1px] bg-gradient-to-b from-transparent to-white animate-bounce"></div>
-        </div>
-    </section>
-
-    <!-- Detailed Shot Section -->
-    <section class="py-32 px-6">
-        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-24 items-center">
-            <div class="relative group">
-                <div class="absolute -inset-4 gold-bg opacity-10 blur-2xl group-hover:opacity-20 transition"></div>
-                <img src="https://images.unsplash.com/photo-1603584173870-7f3ca9128146?auto=format&fit=crop&q=80&w=800" class="relative rounded-2xl grayscale hover:grayscale-0 transition duration-700" alt="Detailing">
-            </div>
-            <div>
-                <h2 class="hero-font text-4xl mb-8 leading-tight">WARUM<br><span class="gold-text">GOLD?</span></h2>
-                <div class="space-y-12">
-                    <div class="flex space-x-6">
-                        <span class="hero-font text-zinc-800 text-4xl">01</span>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Porentiefe Reinheit</h3>
-                            <p class="text-zinc-500">Wir entfernen Rückstände, die andere nicht einmal sehen. Mit High-Tech Equipment und Leidenschaft.</p>
-                        </div>
-                    </div>
-                    <div class="flex space-x-6">
-                        <span class="hero-font text-zinc-800 text-4xl">02</span>
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">Lack-Korrektur</h3>
-                            <p class="text-zinc-500">Wir beseitigen Kratzer und Hologramme dauerhaft, statt sie nur mit Wachs zu überdecken.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Full Image / Mut-Faktor -->
-    <section class="h-[60vh] relative overflow-hidden bg-fixed bg-center bg-cover" style="background-image: url('https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&q=80&w=2000')">
-        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <div class="text-center">
-                <h2 class="hero-font text-5xl md:text-7xl mb-4">SHOWROOM GLANZ</h2>
-                <p class="uppercase tracking-[0.5em] text-sm">Jeden einzelnen Tag</p>
-            </div>
-        </div>
     </section>
 
     <!-- Services Grid -->
-    <section class="py-32 px-6">
+    <section id="leistungen" class="py-32 px-6">
         <div class="max-w-7xl mx-auto">
+            <h2 class="hero-font text-4xl mb-16 text-center">EXKLUSIVE <span class="gold-text">LEISTUNGEN</span></h2>
             <div class="grid md:grid-cols-3 gap-px bg-white/5 border border-white/5">
                 <div class="p-12 card-blur hover:bg-white/5 transition">
                     <h3 class="hero-font text-xl mb-4">INTERIEUR</h3>
@@ -144,12 +106,61 @@
         </div>
     </section>
 
+    <!-- Maps & Anfahrt -->
+    <section id="anfahrt" class="py-32 px-6 bg-zinc-950">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <h2 class="hero-font text-4xl mb-8">SO FINDEN<br><span class="gold-text">SIE UNS.</span></h2>
+                <p class="text-zinc-400 text-lg mb-12">
+                    Besuchen Sie unser Studio in Braunschweig. Parkplätze direkt vor der Tür.
+                </p>
+                <div class="space-y-6 text-xl mb-12">
+                    <p class="flex items-center space-x-4">
+                        <span class="text-zinc-600 italic">ADRESSE:</span>
+                        <span>Saarbrückener Str. 251, 38116 Braunschweig</span>
+                    </p>
+                    <p class="flex items-center space-x-4">
+                        <span class="text-zinc-600 italic">FON:</span>
+                        <a href="tel:01738547989" class="hover:gold-text transition">0173 8547989</a>
+                    </p>
+                </div>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Saarbrückener+Str.+251,+38116+Braunschweig" target="_blank" class="inline-block border border-white/20 px-8 py-4 hero-font text-sm hover:gold-bg hover:text-black transition">
+                    ROUTE PLANEN →
+                </a>
+            </div>
+            <div class="h-[450px] rounded-3xl overflow-hidden border border-white/10 grayscale contrast-125">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2438.4116480112833!2d10.4851346!3d52.279132!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47aff657f8afffff%3A0xc9309cb35471c193!2sGOLD%20Autoaufbereitung!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontaktformular -->
+    <section id="kontakt" class="py-32 px-6">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="hero-font text-4xl mb-16 uppercase">JETZT ANFRAGEN</h2>
+            <form class="grid grid-cols-1 gap-6 text-left">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <input type="text" placeholder="NAME" class="p-6 input-dark rounded-none hero-font text-xs">
+                    <input type="email" placeholder="EMAIL" class="p-6 input-dark rounded-none hero-font text-xs">
+                </div>
+                <input type="text" placeholder="FAHRZEUGMODELL" class="p-6 input-dark rounded-none hero-font text-xs">
+                <textarea rows="5" placeholder="IHRE NACHRICHT" class="p-6 input-dark rounded-none hero-font text-xs"></textarea>
+                <button type="submit" class="gold-bg text-black font-black py-8 px-12 rounded-none text-xl hover:bg-white transition">
+                    ABSENDEN
+                </button>
+            </form>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="p-12 border-t border-white/5 text-center">
+    <footer class="p-12 border-t border-white/5 text-center bg-black">
         <div class="hero-font text-3xl mb-8 tracking-widest gold-text">GOLD.</div>
-        <div class="text-zinc-600 text-xs tracking-widest space-y-2 uppercase">
-            <p>Saarbrückener Str. 251 | 38116 Braunschweig</p>
-            <p>&copy; 2026 GOLD AUTOAUFBEREITUNG | INH. YUSUF TOPALOGLU</p>
+        <div class="flex justify-center space-x-8 text-zinc-500 text-xs tracking-widest uppercase mb-12">
+            <a href="impressum.html" class="hover:text-white transition">Impressum</a>
+            <a href="datenschutz.html" class="hover:text-white transition">Datenschutz</a>
+        </div>
+        <div class="text-zinc-700 text-[10px] tracking-[0.4em] uppercase">
+            &copy; 2026 GOLD AUTOAUFBEREITUNG | INH. YUSUF TOPALOGLU
         </div>
     </footer>
 </body>
